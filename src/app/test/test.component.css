@@ -1,0 +1,146 @@
+h1 {
+    text-align: center;
+}
+#nav span button {
+    width: fit-content;
+    text-align: center;
+    border-radius: 30%;
+}
+ #body {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-evenly;
+ }
+ .enlarged {
+     z-index: 1;
+ }
+ /* The Modal (background) */
+ .modal {
+     display: none; /* Hidden by default */
+     position: fixed; /* Stay in place */
+     z-index: 1; /* Sit on top */
+     padding-top: 100px; /* Location of the box */
+     left: 0;
+     top: 0;
+     width: 100%; /* Full width */
+     height: 100%; /* Full height */
+     overflow: auto; /* Enable scroll if needed */
+     background-color: rgb(0,0,0); /* Fallback color */
+     background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+ }
+ #nav {
+    display: flex;
+    justify-content: space-around;
+    padding-top: 50px;
+    padding-bottom: 100px;
+    background:
+    linear-gradient(27deg, #151515 5px, transparent 5px) 0 5px,
+    linear-gradient(207deg, #151515 5px, transparent 5px) 10px 0px,
+    linear-gradient(27deg, #222 5px, transparent 5px) 0px 10px,
+    linear-gradient(207deg, #222 5px, transparent 5px) 10px 5px,
+    linear-gradient(90deg, #1b1b1b 10px, transparent 10px),
+    linear-gradient(#1d1d1d 25%, #1a1a1a 25%, #1a1a1a 50%, transparent 50%, transparent 75%, #242424 75%, #242424);
+    background-color: #131313;
+    background-size: 20px 20px;
+ }
+ 
+ /* Modal Content (Image) */
+ .modal-content {
+     margin: auto;
+     display: block;
+     width: 80%;
+     max-width: 700px;
+ }
+ 
+ /* Caption of Modal Image (Image Text) - Same Width as the Image */
+ #caption {
+     margin: auto;
+     display: block;
+     width: 80%;
+     max-width: 700px;
+     text-align: center;
+     color: #ccc;
+     padding: 10px 0;
+     height: 150px;
+ }
+ 
+ /* Add Animation - Zoom in the Modal */
+ .modal-content, #caption { 
+     animation-name: zoom;
+     animation-duration: 0.6s;
+ }
+ 
+ @keyframes zoom {
+     from {transform:scale(0)} 
+     to {transform:scale(1)}
+ }
+ 
+ /* The Close Button */
+ .close {
+     position: absolute;
+     top: 15px;
+     right: 35px;
+     color: #f1f1f1;
+     font-size: 40px;
+     font-weight: bold;
+     transition: 0.3s;
+ }
+ 
+ .close:hover,
+ .close:focus {
+     color: #bbb;
+     text-decoration: none;
+     cursor: pointer;
+ }
+ 
+ /* 100% Image Width on Smaller Screens */
+ @media only screen and (max-width: 700px){
+     .modal-content {
+         width: 100%;
+     }
+ }
+
+ /* Background */
+#body {
+    background:
+    radial-gradient(black 15%, transparent 16%) 0 0,
+    radial-gradient(black 15%, transparent 16%) 8px 8px,
+    radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 0 1px,
+    radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 8px 9px;
+    background-color:#282828;
+    background-size:16px 16px;
+}
+
+.img {
+    width: 300px; 
+    height: 300px; 
+    border: 5px black solid; 
+    border-radius: 5%; 
+    cursor: zoom-in;
+    margin: 20px 20px;
+}
+
+h1 {
+    margin: 0;
+    padding: 10px 0;
+    color: white;
+    background:
+    linear-gradient(27deg, #151515 5px, transparent 5px) 0 5px,
+    linear-gradient(207deg, #151515 5px, transparent 5px) 10px 0px,
+    linear-gradient(27deg, #222 5px, transparent 5px) 0px 10px,
+    linear-gradient(207deg, #222 5px, transparent 5px) 10px 5px,
+    linear-gradient(90deg, #1b1b1b 10px, transparent 10px),
+    linear-gradient(#1d1d1d 25%, #1a1a1a 25%, #1a1a1a 50%, transparent 50%, transparent 75%, #242424 75%, #242424);
+    background-color: #131313;
+    background-size: 20px 20px;
+}
+
+.btn-info:focus {
+    border: 0;
+    box-shadow: none;
+}
+
+.btn-info:disabled {
+    box-shadow: 0 0 0 0.2rem rgba(23, 162, 184, 0.5);
+}
