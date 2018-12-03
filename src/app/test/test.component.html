@@ -16,23 +16,23 @@
 
 <div id="nav">
   <span class="nav-left">
-      <button (click)="nav(1)" id="first" [disabled]="pageNo == 1"> << </button>
-    <button (click)="nav(pageNo - 1)" id="prev" [disabled]="pageNo == 1" ><</button>
+      <button class="btn btn-primary" (click)="nav(1)" id="first" [disabled]="pageNo == 1"> << </button>
+    <button class="btn btn-info" (click)="nav(pageNo - 1)" id="prev" [disabled]="pageNo == 1" ><</button>
   </span>
   <span class="nav-center">
-    <button [disabled]="pageNo == pageBtns[0]" (click)="nav(pageBtns[0])">{{ pageBtns[0] }}</button>
-    <button [disabled]="pageNo == pageBtns[1]" (click)="nav(pageBtns[1])">{{ pageBtns[1] }}</button>
-    <button [disabled]="pageNo == pageBtns[2]" (click)="nav(pageBtns[2])">{{ pageBtns[2] }}</button>
-    <button [disabled]="pageNo == pageBtns[3]" (click)="nav(pageBtns[3])">{{ pageBtns[3] }}</button>
-    <button [disabled]="pageNo == pageBtns[4]" (click)="nav(pageBtns[4])">{{ pageBtns[4] }}</button>
-    <button [disabled]="pageNo == pageBtns[5]" (click)="nav(pageBtns[5])">{{ pageBtns[5] }}</button>
-    <button [disabled]="pageNo == pageBtns[6]" (click)="nav(pageBtns[6])">{{ pageBtns[6] }}</button>
-    <button [disabled]="pageNo == pageBtns[7]" (click)="nav(pageBtns[7])">{{ pageBtns[7] }}</button>
-    <button [disabled]="pageNo == pageBtns[8]" (click)="nav(pageBtns[8])">{{ pageBtns[8] }}</button>
-    <button [disabled]="pageNo == pageBtns[9]" (click)="nav(pageBtns[9])">{{ pageBtns[9] }}</button>
+    <button class="btn btn-info" [disabled]="pageNo == pageBtns[0]" (click)="nav(pageBtns[0])">{{ pageBtns[0] }}</button>
+    <button class="btn btn-info" [disabled]="pageNo == pageBtns[1]" (click)="nav(pageBtns[1])">{{ pageBtns[1] }}</button>
+    <button class="btn btn-info" [disabled]="pageNo == pageBtns[2]" (click)="nav(pageBtns[2])">{{ pageBtns[2] }}</button>
+    <button class="btn btn-info" [disabled]="pageNo == pageBtns[3]" (click)="nav(pageBtns[3])">{{ pageBtns[3] }}</button>
+    <button class="btn btn-info" [disabled]="pageNo == pageBtns[4]" (click)="nav(pageBtns[4])">{{ pageBtns[4] }}</button>
+    <button class="btn btn-info" [disabled]="pageNo == pageBtns[5]" (click)="nav(pageBtns[5])">{{ pageBtns[5] }}</button>
+    <button class="btn btn-info" [disabled]="pageNo == pageBtns[6]" (click)="nav(pageBtns[6])">{{ pageBtns[6] }}</button>
+    <button class="btn btn-info" [disabled]="pageNo == pageBtns[7]" (click)="nav(pageBtns[7])">{{ pageBtns[7] }}</button>
+    <button class="btn btn-info" [disabled]="pageNo == pageBtns[8]" (click)="nav(pageBtns[8])">{{ pageBtns[8] }}</button>
+    <button class="btn btn-info" [disabled]="pageNo == pageBtns[9]" (click)="nav(pageBtns[9])">{{ pageBtns[9] }}</button>
   </span>
   <span class="nav-right">
-    <button (click)="nav(pageNo + 1)" id="next" >></button>
+    <button class="btn btn-info" (click)="nav(pageNo + 1)" id="next" >></button>
     
   </span>
 </div>

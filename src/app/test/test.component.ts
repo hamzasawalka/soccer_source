@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 // Don't forget to import these in the module!
 import { HttpClient } from '@angular/common/http';
-import * as $ from 'jquery';
+
 
 
 
@@ -33,20 +33,13 @@ export class TestComponent {
       background-repeat: no-repeat;
       background-position: center;
       background-color: black;
+      transition: 100ms linear;
     `;
 
   constructor(public http: HttpClient) { }
 
   public async ngOnInit() {
     this.getPhotos(this.pageNo)
-
-
-
-    $('.nav-center').children().addClass('btn btn-info')
-    $('#prev, #next').addClass('btn btn-info')
-    $('#first, #last').addClass('btn btn-primary')
-
-    $('.img-con').addClass('img')
 
   }
 
@@ -68,7 +61,6 @@ export class TestComponent {
           this.pageBtns[i + 4] = no + i;
         }
       }
-    console.log(this.pageNo)
     this.getPhotos(no);
   }
 
@@ -95,44 +87,38 @@ export class TestComponent {
   }
 
   generateTags() {
-    $('#body').html('');
+    let body = document.getElementById('body');
+    body.innerHTML = '';
     this.AllPhotoLinks.forEach(e => {
-      document.getElementById('body').innerHTML += `
-            <div  class="img-con" (click)="console.log(1)"
-            style="${this.imgStyles} background-image: url(${e});" ></div>
-            `;
+      let x = document.createElement('div');
+      x.classList.add('img-con');
+      x.style.cssText = this.imgStyles;
+      x.style.backgroundImage = 'url(' + e + ')';
+
+      x.addEventListener('click', (e) => {
+        modal.style.display = "block";
+        modalImg['src'] = e.target['style'].backgroundImage.split('"')[1]
+      })
+
+      x.addEventListener('mouseenter', (e) => {
+        e.target['style'].backgroundSize = '200%';
+      })
+
+      x.addEventListener('mouseleave', (e) => {
+        e.target['style'].backgroundSize = '180%';
+      })
+
+      document.getElementById('body').appendChild(x);
     });
 
-    var modal = document.getElementById('myModal');
-    var modalImg = document.getElementById("img01");
-    $(".img-con").click(function () {
-      modal.style.display = "block";
-      modalImg['src'] = this.style.backgroundImage.split('"')[1];
-    })
+    let modal = document.getElementById('myModal');
+    let modalImg = document.getElementById("img01");
+    let modalClose = document.getElementsByClassName('close')[0];
 
-    // When the user clicks on <span> (x), close the modal
-    $('.close').click(() => {
+    modalClose.addEventListener('click', (e) => {
       modal.style.display = "none";
     });
 
-    $(".img-con").mouseover(function () {
-      $(this).animate({
-        backgroundSize: '200%',
-      });
-    });
-    
-    $(".img-con").mouseout(function () {
-      $(this).animate({
-        backgroundSize: '180%',
-      });
-    });
-
-
-    // $(".img-con").mouseleave(function () {
-    //   $(this).css({
-    //     opacity: '1',
-    //   });
-    // });
   }
 
 
