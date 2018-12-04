@@ -10,10 +10,13 @@ import { HttpClient } from '@angular/common/http';
 export class FlickrComponent implements OnInit {
 	title = 'Photos';
 
-	AllPhotoLinks = [];
+	AllPhotoLinks: any = [];
 	pageNo = 1;
 	pageLimit;
 	pageBtns = [];
+
+	modalDisplay = 'none';
+	modalImg;
 
 	imgStyles = `
 		width: 300px; 
@@ -35,7 +38,7 @@ export class FlickrComponent implements OnInit {
 		for (let i = 0; i < 10; i++) {
 			this.pageBtns.push(i + 1)
 		}
-		this.getPhotos(this.pageNo)
+		this.nav(1)
 	}
 
 	nav(page) {
@@ -56,7 +59,7 @@ export class FlickrComponent implements OnInit {
 					this.pageBtns[i + 4] = no + i;
 				}
 			}
-		this.getPhotos(no);
+		this.toLinks(no);
 	}
 
 	getPhotos(page) {
@@ -69,52 +72,46 @@ export class FlickrComponent implements OnInit {
 					console.log(err);
 					rej(err);
 				});
-		}).then(data => {
-			this.AllPhotoLinks = [];
-			this.pageLimit = parseInt(data['photos'].pages);
-			data['photos'].photo.forEach(element => {
-				this.AllPhotoLinks.push(`https://farm${element['farm']}.staticflickr.com/${element['server']}/${element['id']}_${element['secret']}.jpg`)
+		}).then(data => data)
+	}
+
+	async toLinks(page) {
+		let data = await this.getPhotos(page);
+		let pics = data['photos']['photo'];
+		if (this.pageNo == 1) {
+			pics.forEach(element => {
+				let farm = element['farm'];
+				let server = element['server'];
+				let id = element['id'];
+				let secret = element['secret'];
+				this.AllPhotoLinks.push(`url(https://farm${farm}.staticflickr.com/${server}/${id}_${secret}.jpg)`)
 			});
-		}).then(data => {
-			this.generateTags();
-		});
+		} else {
+			this.AllPhotoLinks = this.AllPhotoLinks.map((elem, i) => {
+				let farm = pics[i]['farm'];
+				let server = pics[i]['server'];
+				let id = pics[i]['id'];
+				let secret = pics[i]['secret'];
+				return `url(https://farm${farm}.staticflickr.com/${server}/${id}_${secret}.jpg)`
+			});
+		}
 	}
 
-	generateTags() {
-		let body = document.getElementById('body');
-		body.innerHTML = '';
-		this.AllPhotoLinks.forEach(e => {
-			let x = document.createElement('div');
-			x.classList.add('img-con');
-			x.style.cssText = this.imgStyles;
-			x.style.backgroundImage = 'url(' + e + ')';
-
-			x.addEventListener('click', (e) => {
-				modal.style.display = 'block';
-				modalImg['src'] = e.target['style'].backgroundImage.split('"')[1];
-			})
-
-			x.addEventListener('mouseenter', (e) => {
-				e.target['style'].backgroundSize = '210%';
-			})
-
-			x.addEventListener('mouseleave', (e) => {
-				e.target['style'].backgroundSize = '180%';
-			})
-
-			document.getElementById('body').appendChild(x);
-		});
-
-		let modal = document.getElementById('myModal');
-		let modalImg = document.getElementById('img01');
-		let modalClose = document.getElementsByClassName('close')[0];
-
-		modalClose.addEventListener('click', () => {
-			modal.style.display = 'none';
-		});
+	zoomIn(event) {
+		event.target['style'].backgroundSize = '210%';
 	}
 
+	zoomOut(event) {
+		event.target['style'].backgroundSize = '180%';
+	}
 
+	maximize(event) {
+		this.modalDisplay = 'block'
+		this.modalImg = event.target['style'].backgroundImage.split('"')[1];
+	}
 
+	close() {
+		this.modalDisplay = 'none'
+	}
 
 }
