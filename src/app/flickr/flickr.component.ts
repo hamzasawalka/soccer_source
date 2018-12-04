@@ -18,20 +18,6 @@ export class FlickrComponent implements OnInit {
 	modalDisplay = 'none';
 	modalImg;
 
-	imgStyles = `
-		width: 300px; 
-		height: 300px; 
-		border: 5px black solid; 
-		border-radius: 5%; 
-		cursor: zoom-in;
-		margin: 20px 20px;
-		background-size: 180%;
-		background-repeat: no-repeat;
-		background-position: center;
-		background-color: black;
-		transition: 100ms linear;
-    `;
-
 	constructor(public http: HttpClient) { }
 
 	ngOnInit() {

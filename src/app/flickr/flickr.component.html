@@ -2,8 +2,7 @@
   
   <div  id="body" >
     <div *ngFor="let pic of AllPhotoLinks" (mouseenter)="zoomIn($event)" class="img-con"
-    (mouseleave)="zoomOut($event)" (click)="maximize($event)" [style.backgroundImage]="pic" 
-     > 
+    (mouseleave)="zoomOut($event)" (click)="maximize($event)" [style.backgroundImage]="pic"> 
       
     </div>
   </div>
