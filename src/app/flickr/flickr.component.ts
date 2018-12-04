@@ -62,23 +62,11 @@ export class FlickrComponent implements OnInit {
 		this.toLinks(no);
 	}
 
-	getPhotos(page) {
-		return new Promise((resolve, rej) => {
-			const url = 'https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=10a341066aefdd9e971da9afa18624ad&tags=soccer&format=json&nojsoncallback=true&per_page=10&page=' + page;
-			this.http.get(url)
-				.subscribe(data => {
-					resolve(data);
-				}, err => {
-					console.log(err);
-					rej(err);
-				});
-		}).then(data => data)
-	}
-
 	async toLinks(page) {
 		let data = await this.getPhotos(page);
 		let pics = data['photos']['photo'];
 		if (this.pageNo == 1) {
+			this.AllPhotoLinks = [];
 			pics.forEach(element => {
 				let farm = element['farm'];
 				let server = element['server'];
@@ -95,6 +83,19 @@ export class FlickrComponent implements OnInit {
 				return `url(https://farm${farm}.staticflickr.com/${server}/${id}_${secret}.jpg)`
 			});
 		}
+	}
+
+	getPhotos(page) {
+		return new Promise((resolve, rej) => {
+			const url = 'https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=10a341066aefdd9e971da9afa18624ad&tags=soccer&format=json&nojsoncallback=true&per_page=10&page=' + page;
+			this.http.get(url)
+				.subscribe(data => {
+					resolve(data);
+				}, err => {
+					console.log(err);
+					rej(err);
+				});
+		}).then(data => data)
 	}
 
 	zoomIn(event) {
