@@ -49,31 +49,24 @@ export class FlickrComponent implements OnInit {
 	}
 
 	async toLinks(page) {
-		let data = await this.getPhotos(page);
-		let pics = data['photos']['photo'];
+		let data = await this.getPhotos( page );
+		let pics = data['results'];
 		if (this.pageNo == 1) {
 			this.AllPhotoLinks = [];
 			pics.forEach(element => {
-				let farm = element['farm'];
-				let server = element['server'];
-				let id = element['id'];
-				let secret = element['secret'];
-				this.AllPhotoLinks.push(`url(https://farm${farm}.staticflickr.com/${server}/${id}_${secret}.jpg)`)
+				this.AllPhotoLinks.push(`url(${element.urls.regular})`)
 			});
 		} else {
 			this.AllPhotoLinks = this.AllPhotoLinks.map((elem, i) => {
-				let farm = pics[i]['farm'];
-				let server = pics[i]['server'];
-				let id = pics[i]['id'];
-				let secret = pics[i]['secret'];
-				return `url(https://farm${farm}.staticflickr.com/${server}/${id}_${secret}.jpg)`
+				let link = pics[i].urls.regular;
+				return `url(${link})`;
 			});
 		}
 	}
 
 	getPhotos(page) {
 		return new Promise((resolve, rej) => {
-			const url = 'https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=10a341066aefdd9e971da9afa18624ad&tags=soccer&format=json&nojsoncallback=true&per_page=10&page=' + page;
+			const url = 'https://api.unsplash.com/search/photos?query=soccer&client_id=c1e898ba8b250e1a7a30a41f5db550c4f8e31c56e9c58cf706a835e2202c362b&page=' + page;
 			this.http.get(url)
 				.subscribe(data => {
 					resolve(data);
